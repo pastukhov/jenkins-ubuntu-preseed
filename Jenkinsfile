@@ -74,8 +74,8 @@ pipeline {
       }
     }
     stage('Make ISO') {
-      steps {      
-        sh 'mkisofs -D -r -V "Unattended Ubuntu Server 16.04" -cache-inodes -J -l -b isolinux/isolinux.bin -c isolinux/boot.cat -no-emul-boot -boot-load-size 4 -boot-info-table -o ${ISO_FILENAME}_unattend.iso ./iso'
+      steps {              
+        sh 'xorriso -as mkisofs -isohybrid-mbr isolinux/isohdpfx.bin -c isolinux/boot.cat -b isolinux/isolinux.bin -no-emul-boot -boot-load-size 4 -boot-info-table -eltorito-alt-boot -e boot/grub/efi.img -no-emul-boot -isohybrid-gpt-basdat -o ${ISO_FILENAME}_unattend.iso ./iso'
       }
       post {
         success {          
