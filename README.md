@@ -24,6 +24,8 @@ These packages must be available on jenkins build node:
 4. Click 'Save'
 5. First build will populate new build parameters for the job, you will be able to set those on next build
 
+**Note:** currently it does not allow selecting new public key, forking repository and changing it is recommended
+
 ### References
 
 * [Automating-ubuntu-preseed](https://github.com/asniii/Automating-ubuntu-preseed/blob/master/64bit_system/files/15/u_preseed)
