@@ -66,7 +66,7 @@ pipeline {
         sh 'sed -i "s#TIMEZONE#${TIMEZONE}#g" ./iso/preseed/server.seed'
         sh '''        	
 			MD5_SUM=$(md5sum ./iso/preseed/server.seed)
-      sed -i "/menuentry \"Install Ubuntu Server\"/imenuentry "Autoinstall"\\n\\
+      sed -i "/menuentry \"Install Ubuntu Server\"/imenuentry \"Autoinstall\"\\n\\
         set gfxpayload=keep\\n\\
         linux /install/vmlinuz gfxpayload=800x600x16,800x600 hostname=${HOSTNAME} --- auto=true url=https://raw.githubusercontent.com/dariusbakunas/jenkins-ubuntu-preseed/master/preseed/server.seed quiet\\n\\
         initrd /install/initrd.gz" ./iso/boot/grub/grub.cfg
