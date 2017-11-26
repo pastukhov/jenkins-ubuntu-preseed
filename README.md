@@ -23,6 +23,8 @@ These packages must be available on jenkins build node:
 3. Use github repository url: 'https://github.com/dariusbakunas/jenkins-ubuntu-preseed.git'
 4. Click 'Save'
 5. First build will populate new build parameters for the job, you will be able to set those on next build
+6. Current installation uses the whole disk and creates single root partition
+7. Check 'Configure' step for randomly generated password you can use to login to freshly installed system
 
 **Note:** currently it does not allow selecting new public key, forking repository and changing it is recommended
 
