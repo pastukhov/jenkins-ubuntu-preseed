@@ -49,7 +49,7 @@ pipeline {
         echo "Password for ${USERNAME} is: \'${PASSWORD}\', make sure to change it on first boot"
         PASSWORD_CRYPT=$(mkpasswd -m sha-512 -S $(pwgen -ns 16 1) ${PASSWORD})
         PASSWORD_CRYPT_ESCAPED=$(echo "$PASSWORD_CRYPT" | sed \'s/[&/\\]/\\\\&/g\')
-        sed -i "s/PASSWORD/${PASSWORD_CRYPT_ESCAPED}/g" ./iso/preseed/server.seed
+        sed -i "s/PASSWORD_CRYPT/${PASSWORD_CRYPT_ESCAPED}/g" ./iso/preseed/server.seed
         '''            
       	sh 'sed -i -r "s#timeout\\s+[0-9]+#timeout 10#g" ./iso/isolinux/isolinux.cfg'        
         sh 'sed -i "s/FULLNAME/${FULLNAME}/g" ./iso/preseed/server.seed'

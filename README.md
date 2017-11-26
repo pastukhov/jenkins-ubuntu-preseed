@@ -1,4 +1,4 @@
-# Jenkins job to create unattended Ubuntu installation ISO #
+# Jenkins job to create unattended Ubuntu Sever 16.04 installation ISO #
 
 ## Requirements
 
@@ -15,6 +15,11 @@ These packages must be available on jenkins build node:
 * fakeroot - for updating initrd image
 
 	$ sudo apt-get install fakeroot
+
+## Features
+
+1. Configurable username, hostname, domain, timezone and root disk device
+2. Installed openssh-server and python packages (minimum requirements for ansible)
 
 ## Creating new job:
 
