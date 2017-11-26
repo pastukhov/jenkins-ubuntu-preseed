@@ -82,7 +82,10 @@ pipeline {
 	  always {
 	    dir('iso') {
         deleteDir()
-      }      
+      }
+      dir('initrd') {
+        deleteDir()
+      }
 	  }
 	}   
 }
