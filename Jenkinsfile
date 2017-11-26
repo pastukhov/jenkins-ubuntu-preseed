@@ -66,10 +66,10 @@ pipeline {
         sh 'sed -i "s#TIMEZONE#${TIMEZONE}#g" ./iso/preseed/server.seed'
         sh '''        	
 			MD5_SUM=$(md5sum ./iso/preseed/server.seed)
-      sed -i "/menuentry \"Install Ubuntu Server\"/imenuentry \"Autoinstall\"\\n\\
+      sed -i '/menuentry "Install Ubuntu Server"/imenuentry "Autoinstall"\\n\\
         set gfxpayload=keep\\n\\
         linux /install/vmlinuz gfxpayload=800x600x16,800x600 hostname=${HOSTNAME} --- auto=true preseed/file=/cdrom/preseed/server.seed preseed/file/checksum=$MD5_SUM quiet\\n\\
-        initrd /install/initrd.gz" ./iso/boot/grub/grub.cfg"    
+        initrd /install/initrd.gz' ./iso/boot/grub/grub.cfg
 			sed -i "/label install/ilabel autoinstall\\n\\
 			  menu label ^Autoinstall Ubuntu 16.04 Server\\n\\
 			  kernel /install/vmlinuz\\n\\
