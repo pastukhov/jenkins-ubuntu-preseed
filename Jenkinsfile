@@ -11,7 +11,9 @@ pipeline {
     string(name: 'TIMEZONE', defaultValue: 'US/Eastern', description: 'Timezone')
     string(name: 'ROOT_DEV', defaultValue: '/dev/sda', description: 'System disk')
   }
-  options([buildDiscarder(logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '3', daysToKeepStr: '', numToKeepStr: '3')), pipelineTriggers([])])
+  options {
+    buildDiscarder(logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '3', daysToKeepStr: '', numToKeepStr: '3'))
+  }
   stages {
     stage('Download ISO') {
       when {
