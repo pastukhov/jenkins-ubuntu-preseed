@@ -18,7 +18,7 @@ These packages must be available on jenkins build node:
 
 ## Features
 
-1. Configurable username, hostname, domain, timezone and root disk device
+1. Configurable username, hostname, authorized public ssh key, domain, timezone and root disk device
 2. Installed openssh-server and python packages (minimum requirements for ansible)
 
 ## Creating new job:
