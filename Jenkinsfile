@@ -79,7 +79,7 @@ pipeline {
   }
   post {  
 	  always {
-	    cleanWs()
+	    cleanWs(patterns: [[pattern: "${ISO_FILENAME}", type: 'EXCLUDE']])
 	  }
 	}   
 }
