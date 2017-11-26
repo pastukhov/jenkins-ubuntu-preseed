@@ -13,6 +13,7 @@ pipeline {
     string(name: 'DOMAIN', defaultValue: 'unassigned-domain', description: 'Domain')
     string(name: 'TIMEZONE', defaultValue: 'US/Eastern', description: 'Timezone')
     string(name: 'ROOT_DEV', defaultValue: '/dev/sda', description: 'System disk')
+    string(name: 'ARTIFACT_NAME', defaultValue: 'ubuntu-16.04.3-server-amd64_unattend.iso')
   }
   options {
     buildDiscarder(logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '3', daysToKeepStr: '', numToKeepStr: '3'))
@@ -80,11 +81,11 @@ pipeline {
     stage('Make ISO') {
       steps {
         sh 'dd if=${ISO_FILENAME}.iso bs=512 count=1 of=./iso/isolinux/isohdpfx.bin'              
-        sh 'xorriso -as mkisofs -isohybrid-mbr ./iso/isolinux/isohdpfx.bin -c isolinux/boot.cat -b isolinux/isolinux.bin -no-emul-boot -boot-load-size 4 -boot-info-table -eltorito-alt-boot -e boot/grub/efi.img -no-emul-boot -isohybrid-gpt-basdat -o ${ISO_FILENAME}_unattend.iso ./iso'
+        sh 'xorriso -as mkisofs -isohybrid-mbr ./iso/isolinux/isohdpfx.bin -c isolinux/boot.cat -b isolinux/isolinux.bin -no-emul-boot -boot-load-size 4 -boot-info-table -eltorito-alt-boot -e boot/grub/efi.img -no-emul-boot -isohybrid-gpt-basdat -o ${ARTIFACT_NAME} ./iso'
       }
       post {
         success {          
-          archiveArtifacts artifacts: "${ISO_FILENAME}_unattend.iso", fingerprint: true
+          archiveArtifacts artifacts: "${ARTIFACT_NAME}", fingerprint: true
         }
       }
     }   
