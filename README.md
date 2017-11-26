@@ -23,3 +23,9 @@ These packages must be available on jenkins build node:
 3. Use github repository url: 'https://github.com/dariusbakunas/jenkins-ubuntu-preseed.git'
 4. Click 'Save'
 5. First build will populate new build parameters for the job, you will be able to set those on next build
+
+### References
+
+* [Automating-ubuntu-preseed](https://github.com/asniii/Automating-ubuntu-preseed/blob/master/64bit_system/files/15/u_preseed)
+* [Ubuntu-16.04-Unattended-Install](https://github.com/dsgnr/Ubuntu-16.04-Unattended-Install)
+* [ubuntu-unattended](https://github.com/netson/ubuntu-unattended)
