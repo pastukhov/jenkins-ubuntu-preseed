@@ -20,7 +20,7 @@ pipeline {
     stage('Download ISO') {
       when {
         expression {
-          return !(fileExists("$ISO_FILENAME"))
+          return !(fileExists("${ISO_FILENAME}.iso"))
         }
         
       }
