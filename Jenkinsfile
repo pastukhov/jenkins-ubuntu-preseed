@@ -46,7 +46,7 @@ pipeline {
         PASSWORD=$(openssl rand -base64 32)
         echo "Password for ${USERNAME} is: \'${PASSWORD}\', make sure to change it on first boot"
         PASSWORD_CRYPT=$(mkpasswd -m sha-512 -S $(pwgen -ns 16 1) ${PASSWORD})
-        PASSWORD_CRYPT_ESCAPED=$(sed \'s/[&/\\]/\\\\&/g\' <<<"$PASSWORD_CRYPT")
+        PASSWORD_CRYPT_ESCAPED=$(echo "$PASSWORD_CRYPT" | sed \'s/[&/\\]/\\\\&/g\')
         '''      
       	sh 'echo en > ./iso/isolinux/lang'
       	sh 'sed -i -r "s#timeout\\s+[0-9]+#timeout 10#g" ./iso/isolinux/isolinux.cfg'
