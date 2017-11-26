@@ -53,7 +53,7 @@ pipeline {
         sh 'cp ./preseed/server.seed ./iso/preseed'
         sh 'sed -i "s/FULLNAME/${FULLNAME}/g" ./iso/preseed/server.seed'
         sh 'sed -i "s/USERNAME/${USERNAME}/g" ./iso/preseed/server.seed'
-        sh 'sed -i "s/PASSWORD/$(echo ${PASSWORD_CRYPT} | sed -e \'s/\\/\\\\/g; s/\//\\\//g; s/&/\\\&/g\')/g" ./iso/preseed/server.seed'
+        sh 'sed -i "s/PASSWORD/$(echo ${PASSWORD_CRYPT} | sed -e \'s/\\\\/\\\\\\\\/g; s/\\//\\\\\\//g; s/&/\\\\\\&/g\')/g" ./iso/preseed/server.seed'
         sh 'sed -i "s/HOSTNAME/${HOSTNAME}/g" ./iso/preseed/server.seed'
         sh 'sed -i "s/DOMAIN/${DOMAIN}/g" ./iso/preseed/server.seed'
         sh 'sed -i "s#ROOT_DEV#${ROOT_DEV}#g" ./iso/preseed/server.seed'
