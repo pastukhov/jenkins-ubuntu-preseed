@@ -7,6 +7,7 @@ pipeline {
     string(name: 'LOCALE', defaultValue: 'en_US', description: 'Locale')
   	string(name: 'FULLNAME', defaultValue: 'Ubuntu', description: 'Full Name')
   	string(name: 'USERNAME', defaultValue: 'ubuntu', description: 'Username')
+    string(name: 'PUBKEY', defaultValue: 'ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQCw73YVw5JKvNvATa7EAh/bQFDV41GKj2B2/bZ5QF+qJQXb08o1az0A8dsGbxlkkXPALxzmfWKcLxoDIOYD58kkPK/+eCbE+EDi/trpQ1cdltVvlC31cwfctlCOrdKboKjwqqUKsurfJY8zFlsYBras5IxdLSk/4VxOkC6O+/3+ptw+UAY5RGdAuwDppP60qi807t7ySPmtVx90I+I31rpzizzqfI/wkUutVonZKYn9A9nsF3Xkf2MQwtbA7OWfVv/0IkXdsTatQAFqkUPhO8ZOiMhCeb4E2juO/b0jCNxyieXfkxAkpONfLM0E+0HLvDsOjWE7mvcpuZ0hFDPFYk/d jenkins@jenkins', description: 'Public SSH key that will be added to authorized_keys for this user')
     string(name: 'NETIFACE', defaultValue: 'auto', description: 'Default network interface')
     string(name: 'HOSTNAME', defaultValue: 'unassigned-hostname', description: 'Hostname')
     string(name: 'DOMAIN', defaultValue: 'unassigned-domain', description: 'Domain')
@@ -36,8 +37,9 @@ pipeline {
     stage('Update initrd') {
 	  steps {
 	    dir('initrd') {
+        sh 'echo "$PUBKEY" > ./userkey.pub'
 	      sh 'cat ../iso/install/initrd.gz | gzip -d > "./initrd"'
-	      sh 'find "../custom" | fakeroot cpio -o -H newc -A -F "./initrd"'
+	      sh './userkey.pub" | fakeroot cpio -o -H newc -A -F "./initrd"'
 	      sh 'cat "./initrd" | gzip -9c > "../iso/install/initrd.gz"'	      
 	    }
 	  }    
@@ -52,7 +54,7 @@ pipeline {
         PASSWORD_CRYPT=$(mkpasswd -m sha-512 -S $(pwgen -ns 16 1) ${PASSWORD})
         PASSWORD_CRYPT_ESCAPED=$(echo "$PASSWORD_CRYPT" | sed \'s/[&/\\]/\\\\&/g\')
         sed -i "s/PASSWORD_CRYPT/${PASSWORD_CRYPT_ESCAPED}/g" ./iso/preseed/server.seed
-        '''            
+        '''                  
       	sh 'sed -i -r "s#timeout\\s+[0-9]+#timeout 10#g" ./iso/isolinux/isolinux.cfg'        
         sh 'sed -i "s#NETIFACE#${NETIFACE}#g" ./iso/preseed/server.seed'
         sh 'sed -i "s#LOCALE#${LOCALE}#g" ./iso/preseed/server.seed'
