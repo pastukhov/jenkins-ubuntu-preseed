@@ -39,7 +39,7 @@ pipeline {
 	    dir('initrd') {
         sh 'echo "$PUBKEY" > ./userkey.pub'
 	      sh 'cat ../iso/install/initrd.gz | gzip -d > "./initrd"'
-	      sh './userkey.pub" | fakeroot cpio -o -H newc -A -F "./initrd"'
+	      sh 'echo "./userkey.pub" | fakeroot cpio -o -H newc -A -F "./initrd"'
 	      sh 'cat "./initrd" | gzip -9c > "../iso/install/initrd.gz"'	      
 	    }
 	  }    
