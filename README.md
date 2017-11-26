@@ -31,8 +31,6 @@ These packages must be available on jenkins build node:
 6. Current installation uses the whole disk and creates single root partition
 7. Check 'Configure' step for randomly generated password you can use to login to freshly installed system
 
-**Note:** currently it does not allow selecting new public key, forking repository and changing it is recommended
-
 ### References
 
 * [Automating-ubuntu-preseed](https://github.com/asniii/Automating-ubuntu-preseed/blob/master/64bit_system/files/15/u_preseed)
