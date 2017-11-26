@@ -30,7 +30,7 @@ pipeline {
     }
     stage('Mount ISO') {
       steps {                  
-        sh '7z x ./$ISO_FILENAME -oiso'
+        sh '7z x ./${ISO_FILENAME}.iso -oiso'
       }
     }
     stage('Update initrd') {
