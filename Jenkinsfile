@@ -25,10 +25,7 @@ pipeline {
       }
     }
     stage('Mount ISO') {
-      steps {   
-        dir('iso') {
-          deleteDir()
-        }         
+      steps {                  
         sh '7z x ./$ISO_FILENAME -oiso'
       }
     }
@@ -37,8 +34,7 @@ pipeline {
 	    dir('initrd') {
 	      sh 'cat ../iso/install/initrd.gz | gzip -d > "./initrd"'
 	      sh 'find "../custom" | fakeroot cpio -o -H newc -A -F "./initrd"'
-	      sh 'cat "./initrd" | gzip -9c > "../iso/install/initrd.gz"'
-	      deleteDir()
+	      sh 'cat "./initrd" | gzip -9c > "../iso/install/initrd.gz"'	      
 	    }
 	  }    
     }
@@ -81,9 +77,7 @@ pipeline {
   }
   post {  
 	  always {
-	    dir('iso') {
-          deleteDir()
-      }
+	    cleanWs()
 	  }
 	}   
 }
