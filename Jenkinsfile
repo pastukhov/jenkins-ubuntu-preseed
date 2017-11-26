@@ -71,12 +71,14 @@ pipeline {
       steps {      
         sh 'mkisofs -D -r -V "Unattended Ubuntu Server 16.04" -cache-inodes -J -l -b isolinux/isolinux.bin -c isolinux/boot.cat -no-emul-boot -boot-load-size 4 -boot-info-table -o ${ISO_FILENAME}_unattend.iso ./iso'
       }
+      post {
+        success {          
+          archiveArtifacts artifacts: '${ISO_FILENAME}_unattend.iso', fingerprint: true
+        }
+      }
     }   
   }
-  post {
-    success {
-      archive "${ISO_FILENAME}_unattend.iso"
-    }
+  post {  
 	  always {
 	    dir('iso') {
           deleteDir()
