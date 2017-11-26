@@ -16,7 +16,7 @@ pipeline {
     string(name: 'ARTIFACT_NAME', defaultValue: 'ubuntu-16.04.3-server-amd64_unattend.iso')
   }
   options {
-    buildDiscarder(logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '3', daysToKeepStr: '', numToKeepStr: '3'))
+    buildDiscarder(logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '3', daysToKeepStr: '', numToKeepStr: ''))
   }
   stages {
     stage('Download ISO') {
