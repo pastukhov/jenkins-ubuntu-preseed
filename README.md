@@ -1,4 +1,4 @@
-# Jenkins job to create unattended Ubuntu Sever 16.04 installation ISO #
+# Jenkins job to create unattended Ubuntu Sever 16.04 ISO #
 
 ## Requirements
 

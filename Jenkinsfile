@@ -1,11 +1,13 @@
 pipeline {
   agent any
   environment {
-    ISO_FILENAME = 'ubuntu-16.04.3-server-amd64.iso'  
+    ISO_FILENAME = 'ubuntu-16.04.3-server-amd64'  
   }
   parameters {
+    string(name: 'LOCALE', defaultValue: 'en_US', description: 'Locale')
   	string(name: 'FULLNAME', defaultValue: 'Ubuntu', description: 'Full Name')
   	string(name: 'USERNAME', defaultValue: 'ubuntu', description: 'Username')
+    string(name: 'NETIFACE', defaultValue: 'auto', description: 'Default network interface')
     string(name: 'HOSTNAME', defaultValue: 'unassigned-hostname', description: 'Hostname')
     string(name: 'DOMAIN', defaultValue: 'unassigned-domain', description: 'Domain')
     string(name: 'TIMEZONE', defaultValue: 'US/Eastern', description: 'Timezone')
@@ -23,7 +25,7 @@ pipeline {
         
       }
       steps {
-        sh "curl -O http://releases.ubuntu.com/16.04/$ISO_FILENAME"
+        sh "curl -O http://releases.ubuntu.com/16.04/${ISO_FILENAME}.iso"
       }
     }
     stage('Mount ISO') {
@@ -52,6 +54,8 @@ pipeline {
         sed -i "s/PASSWORD_CRYPT/${PASSWORD_CRYPT_ESCAPED}/g" ./iso/preseed/server.seed
         '''            
       	sh 'sed -i -r "s#timeout\\s+[0-9]+#timeout 10#g" ./iso/isolinux/isolinux.cfg'        
+        sh 'sed -i "s#NETIFACE#${NETIFACE}#g" ./iso/preseed/server.seed'
+        sh 'sed -i "s#LOCALE#${LOCALE}#g" ./iso/preseed/server.seed'
         sh 'sed -i "s/FULLNAME/${FULLNAME}/g" ./iso/preseed/server.seed'
         sh 'sed -i "s/USERNAME/${USERNAME}/g" ./iso/preseed/server.seed'        
         sh 'sed -i "s/HOSTNAME/${HOSTNAME}/g" ./iso/preseed/server.seed'
