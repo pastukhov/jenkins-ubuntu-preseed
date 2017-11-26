@@ -84,9 +84,9 @@ d-i grub-installer/bootdev  string default
 d-i finish-install/reboot_in_progress note
 
 d-i preseed/late_command string \
-  cp -r /custom /target/custom; \
+  cp -r /userkey.pub /target/userkey.pub; \
   in-target sh -c 'sed -i "s/^#PermitRootLogin.*\$/PermitRootLogin prohibit-password/g" /etc/ssh/sshd_config'; \
-  in-target sh -c 'mkdir -p --mode=0700 /home/USERNAME/.ssh && cat /custom/userkey.pub > /home/USERNAME/.ssh/authorized_keys && chmod 0600 /home/USERNAME/.ssh/authorized_keys'; \
+  in-target sh -c 'mkdir -p --mode=0700 /home/USERNAME/.ssh && cat /userkey.pub > /home/USERNAME/.ssh/authorized_keys && chmod 0600 /home/USERNAME/.ssh/authorized_keys'; \
   in-target sh -c 'chown -R USERNAME:USERNAME /home/USERNAME/.ssh';
-  rm -r /target/custom;
+  rm -r /target/userkey.pub;
 
