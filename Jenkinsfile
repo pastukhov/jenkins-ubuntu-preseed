@@ -73,7 +73,7 @@ pipeline {
       }
       post {
         success {          
-          archiveArtifacts artifacts: '${ISO_FILENAME}_unattend.iso', fingerprint: true
+          archiveArtifacts artifacts: "${ISO_FILENAME}_unattend.iso", fingerprint: true
         }
       }
     }   
