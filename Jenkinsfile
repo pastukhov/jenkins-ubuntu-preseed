@@ -79,7 +79,9 @@ pipeline {
   }
   post {  
 	  always {
-	    cleanWs(patterns: [[pattern: "${ISO_FILENAME}", type: 'EXCLUDE']])
+	    dir('iso') {
+        deleteDir()
+      }      
 	  }
 	}   
 }
