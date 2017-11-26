@@ -36,3 +36,4 @@ These packages must be available on jenkins build node:
 * [Automating-ubuntu-preseed](https://github.com/asniii/Automating-ubuntu-preseed/blob/master/64bit_system/files/15/u_preseed)
 * [Ubuntu-16.04-Unattended-Install](https://github.com/dsgnr/Ubuntu-16.04-Unattended-Install)
 * [ubuntu-unattended](https://github.com/netson/ubuntu-unattended)
+* [example-preseed](https://help.ubuntu.com/lts/installation-guide/example-preseed.txt)
