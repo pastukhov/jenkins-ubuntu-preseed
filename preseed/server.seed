@@ -58,38 +58,38 @@ d-i partman/choose_partition select finish
 d-i partman/confirm boolean true
 d-i partman/confirm_nooverwrite boolean true
 
-d-i partman-auto/expert_recipe string boot-root ::
-
-1 1 1 free
-	$gptonly{ }
-	$primary{ }
-	$lvmignore{ }
-	$bios_boot{ }
-	method{ biosgrub } .
-
-256 10 256 fat32
-	$gptonly{ }
-	$primary{ }
-	$lvmignore{ }
-	method{ efi }
-	format{ } .
-
-500 10000 1000000 ext4
-	$defaultignore{ }
-	$lvmok{ }
-	method{ format }
-	format{ }
-	use_filesystem{ }
-	filesystem{ ext4 }
-	mountpoint{ / }
-	lv_name{ root } .
-
-64 512 150% linux-swap
-	$defaultignore{ }
-	$lvmok{ }
-	method{ swap }
-	format{ }
-	lv_name{ swap } .
+d-i partman-auto/expert_recipe string boot-root :: \
+1 1 1 free 					\
+	$gptonly{ }				\
+	$primary{ }				\
+	$lvmignore{ }			\
+	$bios_boot{ }			\
+	method{ biosgrub } 		\
+.							\
+256 10 256 fat32			\
+	$gptonly{ }				\
+	$primary{ }				\
+	$lvmignore{ }			\
+	method{ efi }			\
+	format{ }				\
+.							\
+500 10000 1000000 ext4		\
+	$defaultignore{ }		\
+	$lvmok{ }				\
+	method{ format }		\
+	format{ }				\
+	use_filesystem{ }		\
+	filesystem{ ext4 }		\
+	mountpoint{ / }			\
+	lv_name{ root } 		\
+.							\
+64 512 150% linux-swap		\
+	$defaultignore{ }		\
+	$lvmok{ }				\
+	method{ swap }			\
+	format{ }				\
+	lv_name{ swap } 		\
+.
 
 d-i partman/mount_style select uuid
  
