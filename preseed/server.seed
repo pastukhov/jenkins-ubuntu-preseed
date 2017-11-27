@@ -74,7 +74,7 @@ d-i partman-auto/expert_recipe string						\
                       method{ efi }                        \
                       format{ }                            \
               .                                            \
-               20000 50 20000 ext4                          \
+               500 10000 1000000 ext4                      \
                       $defaultignore{ }                    \
                       $lvmok{ }                            \
                       method{ format }                     \
