@@ -35,6 +35,10 @@ These packages must be available on jenkins build node:
 6. Current installation uses the whole disk and creates single root partition
 7. Check 'Configure' step for randomly generated password you can use to login to freshly installed system
 
+## Known issues
+
+* Current master is broken, use 0.0.1 tag for working non-UEFI version
+
 ### References
 
 * [Automating-ubuntu-preseed](https://github.com/asniii/Automating-ubuntu-preseed/blob/master/64bit_system/files/15/u_preseed)
