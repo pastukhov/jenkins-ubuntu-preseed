@@ -58,7 +58,8 @@ d-i partman/choose_partition select finish
 d-i partman/confirm boolean true
 d-i partman/confirm_nooverwrite boolean true
 
-d-i partman-auto/expert_recipe string boot-root :: \
+d-i partman-auto/expert_recipe string 			\
+boot-root :: 				\
 1 1 1 free 					\
 	$gptonly{ }				\
 	$primary{ }				\
