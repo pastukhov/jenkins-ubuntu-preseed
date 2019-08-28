@@ -32,7 +32,7 @@ pipeline {
     }
     stage('Mount ISO') {
       steps {                  
-        sh '7z x ./${ISO_FILENAME}.iso -oiso'
+        sh 'rsync -avz /var/jenkins_home/ iso'
       }
     }
     stage('Update initrd') {
